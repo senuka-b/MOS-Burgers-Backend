@@ -39,16 +39,20 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@RequestBody User user) {
-        return ResponseEntity.ok(service.signup(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.signup(user));
     }
 
     @PutMapping("/update")
     public ResponseEntity<User> update(@RequestBody User user) {
-        return ResponseEntity.ok(service.updateUser(user));
+        User updateUser = service.updateUser(user);
+        return updateUser != null ? ResponseEntity.ok(updateUser)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<Boolean> delete(@RequestParam Integer id) {
-        return ResponseEntity.ok(service.deleteUser(id));
+        Boolean deleted = service.deleteUser(id);
+        return deleted ? ResponseEntity.noContent().build()
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

@@ -34,12 +34,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
+        if (!repository.existsById(user.getId())) return null;
+
         UserEntity entity = repository.save(mapper.map(user, UserEntity.class));
         return mapper.map(entity, User.class);
     }
 
     @Override
     public Boolean deleteUser(Integer id) {
+        if (!repository.existsById(id)) return false;
+
         repository.deleteById(id);
 
         return true;
