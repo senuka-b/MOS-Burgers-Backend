@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean deleteUser(Integer id) {
+        repository.deleteById(id);
+
+        return true;
+    }
+
+    @Override
     public List<User> getAll() {
-        return null;
+        return repository.findAll()
+                .stream()
+                .map(userEntity -> mapper.map(userEntity, User.class))
+                .toList();
     }
 }

@@ -46,4 +46,9 @@ public class UserController {
     public ResponseEntity<User> update(@RequestBody User user) {
         return ResponseEntity.ok(service.updateUser(user));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Boolean> delete(@RequestParam Integer id) {
+        return ResponseEntity.ok(service.deleteUser(id));
+    }
 }

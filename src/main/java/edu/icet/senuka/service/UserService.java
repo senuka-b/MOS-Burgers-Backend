@@ -9,5 +9,6 @@ public interface UserService {
     Optional<User> login(User user);
     User signup(User user);
     User updateUser(User user);
+    Boolean deleteUser(Integer id);
     List<User> getAll();
 }
