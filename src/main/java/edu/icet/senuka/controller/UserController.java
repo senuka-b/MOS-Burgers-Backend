@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserController {
     private final UserService service;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
         return service.login(user)
                 .map(ResponseEntity::ok)

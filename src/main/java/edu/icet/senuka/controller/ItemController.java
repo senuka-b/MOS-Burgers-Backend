@@ -27,7 +27,11 @@ public class ItemController {
 
     @PostMapping("/create")
     public ResponseEntity<Item> createItem(@RequestBody Item item) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(item);
+        Item addItem = service.addItem(item);
+
+
+        return addItem == null ? ResponseEntity.badRequest().build()
+            : ResponseEntity.status(HttpStatus.CREATED).body(addItem);
     }
 
     @PutMapping("/update")
